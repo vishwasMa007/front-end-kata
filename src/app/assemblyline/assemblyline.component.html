@@ -1,1 +1,23 @@
-TODO -- src/app/assemblyline/assemblyline.component.html
+<label class="inputlabel">Add an Item:</label>
+<input
+  data-test="assembly-add-item"
+  class="inputDataEntry"
+  #box
+  (keyup.enter)="onEnter(box.value)"
+/>
+<div class="stage-container">
+  <div data-test="assembly-stage" *ngFor="let stage of assemblyDetailsToView">
+    <ng-container *ngFor="let data of stage">
+      <div class="label">{{ data.stagelabel }}</div>
+      <button
+        data-test="assembly-item"
+        class="values assembly-item btn-idea"
+        *ngFor="let names of data.stageData"
+        (click)="onLeftClick(names, data.stagelabel)"
+        (contextmenu)="onRightClick(names, data.stagelabel)"
+      >
+        {{ names }}
+      </button>
+    </ng-container>
+  </div>
+</div>
